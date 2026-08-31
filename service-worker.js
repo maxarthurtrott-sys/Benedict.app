@@ -6,8 +6,8 @@ const ASSETS = [
   "./app.js",
   "./ics-parser.js",
   "./manifest.json",
-  "./icons/icon192.png",
-  "./icons/icon512.png",
+  "./icon192.png",
+  "./icon512.png",
 ];
 
 self.addEventListener("install", (event) => {
