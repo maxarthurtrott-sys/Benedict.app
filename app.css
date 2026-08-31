@@ -1,0 +1,242 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;1,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+html, body { height: 100%; }
+body {
+  background: #1B2430;
+  color: #F3EEE4;
+  font-family: 'Inter', sans-serif;
+  overscroll-behavior-y: none;
+}
+
+.app { display: flex; flex-direction: column; height: 100dvh; position: relative; }
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: calc(env(safe-area-inset-top, 0px) + 16px) 20px 12px;
+}
+.brand {
+  font-family: 'Fraunces', serif;
+  letter-spacing: 0.16em;
+  font-size: 14px;
+  color: #B08A52;
+}
+.icon-btn {
+  background: none;
+  border: none;
+  color: #7C8695;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+
+.tabs {
+  display: flex;
+  gap: 6px;
+  padding: 0 20px 12px;
+  border-bottom: 1px solid #2A3542;
+}
+.tab {
+  background: none;
+  border: none;
+  color: #7C8695;
+  font-size: 13.5px;
+  padding: 8px 14px;
+  border-radius: 10px 10px 0 0;
+  cursor: pointer;
+}
+.tab.active { color: #B08A52; background: #242F3D; }
+
+main { flex: 1; padding: 18px 20px calc(env(safe-area-inset-bottom, 0px) + 30px); overflow-y: auto; }
+
+.panel { display: none; }
+.panel.active { display: block; }
+
+.notice {
+  font-size: 12.5px;
+  color: #A6472B;
+  background: rgba(166,71,43,0.12);
+  border: 1px solid rgba(166,71,43,0.35);
+  padding: 10px 12px;
+  border-radius: 10px;
+  margin-bottom: 14px;
+}
+.notice a { color: #B08A52; }
+.hidden { display: none !important; }
+
+.brief-card {
+  background: #242F3D;
+  border: 1px solid #34404F;
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+.brief-header { display: flex; align-items: flex-start; gap: 12px; }
+.brief-text {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: #D9D2C4;
+  flex: 1;
+}
+.speak-btn {
+  background: #1E2733;
+  border: 1px solid #34404F;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  font-size: 15px;
+  cursor: pointer;
+  color: #B08A52;
+}
+.speak-btn:active { background: #34404F; }
+.weather-row {
+  display: flex;
+  gap: 14px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #34404F;
+  font-size: 13.5px;
+}
+.accent { color: #B08A52; }
+
+.section-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #7C8695;
+  margin: 6px 0 10px;
+}
+
+.timeline .event {
+  display: flex;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid #242F3D;
+}
+.timeline .event:last-child { border-bottom: none; }
+.event-time {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: #B08A52;
+  width: 52px;
+  flex-shrink: 0;
+}
+.event-title { font-size: 14px; color: #F3EEE4; }
+.empty-state { font-size: 13.5px; color: #5B6675; padding: 8px 0; }
+
+.task-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #1E2733;
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-size: 14px;
+  cursor: pointer;
+}
+.task-item.done { color: #5B6675; text-decoration: line-through; }
+.task-check {
+  width: 17px; height: 17px;
+  border-radius: 50%;
+  border: 1.5px solid #7C8695;
+  flex-shrink: 0;
+}
+.task-item.done .task-check { background: #8FA88C; border-color: #8FA88C; }
+
+.add-row { display: flex; gap: 8px; margin-bottom: 26px; }
+.add-row input {
+  flex: 1;
+  background: #1E2733;
+  border: 1px solid #34404F;
+  border-radius: 12px;
+  padding: 12px 14px;
+  color: #F3EEE4;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+}
+.add-row input:focus { outline: 1px solid #B08A52; }
+.add-btn {
+  width: 44px;
+  background: #B08A52;
+  color: #1B2430;
+  border: none;
+  border-radius: 12px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.hint { font-size: 12.5px; color: #7C8695; margin-bottom: 10px; }
+.news-list { display: flex; flex-direction: column; gap: 10px; }
+.news-item {
+  background: #1E2733;
+  border-radius: 12px;
+  padding: 12px;
+}
+.news-topic {
+  font-size: 10.5px;
+  text-transform: uppercase;
+  color: #B08A52;
+}
+.news-title {
+  font-family: 'Fraunces', serif;
+  font-size: 14px;
+  margin-top: 4px;
+}
+.news-source { font-size: 12px; color: #7C8695; margin-top: 4px; display: block; }
+
+/* Settings overlay */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(15,20,25,0.6);
+  z-index: 20;
+  display: flex;
+  align-items: flex-end;
+}
+.sheet {
+  width: 100%;
+  max-height: 92%;
+  background: #1B2430;
+  border-radius: 20px 20px 0 0;
+  padding: calc(env(safe-area-inset-top, 0px) + 20px) 20px calc(env(safe-area-inset-bottom, 0px) + 24px);
+  overflow-y: auto;
+  border-top: 1px solid #34404F;
+}
+.sheet-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
+.sheet-header h1 { font-family: 'Fraunces', serif; color: #B08A52; font-size: 20px; }
+.sub { color: #7C8695; font-size: 12.5px; margin-bottom: 22px; line-height: 1.5; }
+.sheet section { margin-bottom: 22px; }
+.sheet h2 { font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.06em; color: #D9D2C4; margin-bottom: 10px; }
+.sheet label { display: block; font-size: 12.5px; color: #7C8695; margin: 10px 0 5px; }
+.sheet input[type="text"], .sheet select {
+  width: 100%;
+  background: #242F3D;
+  border: 1px solid #34404F;
+  border-radius: 10px;
+  padding: 11px 12px;
+  color: #F3EEE4;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+}
+.sheet input[type="range"] { width: 100%; }
+.checkbox-row { display: flex; align-items: center; gap: 8px; font-size: 13.5px; color: #F3EEE4; margin-top: 8px; }
+.checkbox-row input { width: auto; }
+#saveBtn {
+  background: #B08A52;
+  color: #1B2430;
+  border: none;
+  border-radius: 10px;
+  padding: 13px 22px;
+  font-size: 14.5px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+}
+.saved-note { display: block; text-align: center; margin-top: 10px; color: #8FA88C; font-size: 13px; }
