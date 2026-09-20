@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;1,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
-
+ 
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-
+ 
 html, body { height: 100%; }
 body {
   background: #1B2430;
@@ -9,9 +9,9 @@ body {
   font-family: 'Inter', sans-serif;
   overscroll-behavior-y: none;
 }
-
+ 
 .app { display: flex; flex-direction: column; height: 100dvh; position: relative; }
-
+ 
 .topbar {
   display: flex;
   align-items: center;
@@ -32,12 +32,13 @@ body {
   cursor: pointer;
   padding: 4px 8px;
 }
-
+ 
 .tabs {
   display: flex;
   gap: 6px;
   padding: 0 20px 12px;
   border-bottom: 1px solid #2A3542;
+  overflow-x: auto;
 }
 .tab {
   background: none;
@@ -47,14 +48,15 @@ body {
   padding: 8px 14px;
   border-radius: 10px 10px 0 0;
   cursor: pointer;
+  white-space: nowrap;
 }
 .tab.active { color: #B08A52; background: #242F3D; }
-
+ 
 main { flex: 1; padding: 18px 20px calc(env(safe-area-inset-bottom, 0px) + 30px); overflow-y: auto; }
-
+ 
 .panel { display: none; }
 .panel.active { display: block; }
-
+ 
 .notice {
   font-size: 12.5px;
   color: #A6472B;
@@ -66,7 +68,7 @@ main { flex: 1; padding: 18px 20px calc(env(safe-area-inset-bottom, 0px) + 30px)
 }
 .notice a { color: #B08A52; }
 .hidden { display: none !important; }
-
+ 
 .brief-card {
   background: #242F3D;
   border: 1px solid #34404F;
@@ -104,7 +106,7 @@ main { flex: 1; padding: 18px 20px calc(env(safe-area-inset-bottom, 0px) + 30px)
   font-size: 13.5px;
 }
 .accent { color: #B08A52; }
-
+ 
 .section-label {
   font-size: 12px;
   text-transform: uppercase;
@@ -112,7 +114,7 @@ main { flex: 1; padding: 18px 20px calc(env(safe-area-inset-bottom, 0px) + 30px)
   color: #7C8695;
   margin: 6px 0 10px;
 }
-
+ 
 .timeline .event {
   display: flex;
   gap: 12px;
@@ -129,7 +131,7 @@ main { flex: 1; padding: 18px 20px calc(env(safe-area-inset-bottom, 0px) + 30px)
 }
 .event-title { font-size: 14px; color: #F3EEE4; }
 .empty-state { font-size: 13.5px; color: #5B6675; padding: 8px 0; }
-
+ 
 .task-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
 .task-item {
   display: flex;
@@ -149,7 +151,7 @@ main { flex: 1; padding: 18px 20px calc(env(safe-area-inset-bottom, 0px) + 30px)
   flex-shrink: 0;
 }
 .task-item.done .task-check { background: #8FA88C; border-color: #8FA88C; }
-
+ 
 .add-row { display: flex; gap: 8px; margin-bottom: 26px; }
 .add-row input {
   flex: 1;
@@ -171,7 +173,7 @@ main { flex: 1; padding: 18px 20px calc(env(safe-area-inset-bottom, 0px) + 30px)
   font-size: 18px;
   cursor: pointer;
 }
-
+ 
 .hint { font-size: 12.5px; color: #7C8695; margin-bottom: 10px; }
 .news-list { display: flex; flex-direction: column; gap: 10px; }
 .news-item {
@@ -190,7 +192,7 @@ main { flex: 1; padding: 18px 20px calc(env(safe-area-inset-bottom, 0px) + 30px)
   margin-top: 4px;
 }
 .news-source { font-size: 12px; color: #7C8695; margin-top: 4px; display: block; }
-
+ 
 /* Life trackers */
 .tracker-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px; }
 .tracker-card {
@@ -224,7 +226,6 @@ main { flex: 1; padding: 18px 20px calc(env(safe-area-inset-bottom, 0px) + 30px)
 .tracker-chart { width: 100%; height: 56px; display: block; margin-bottom: 10px; }
 .chart-empty { font-size: 12px; color: #5B6675; font-style: italic; font-family: 'Fraunces', serif; margin-bottom: 10px; }
 .tracker-action-row { display: flex; justify-content: flex-end; }
-.tracker-history { font-size: 12px; color: #7C8695; margin-bottom: 10px; line-height: 1.6; }
 .tracker-btn {
   background: #B08A52;
   color: #1B2430;
@@ -246,7 +247,7 @@ main { flex: 1; padding: 18px 20px calc(env(safe-area-inset-bottom, 0px) + 30px)
   font-size: 14px;
   cursor: pointer;
 }
-
+ 
 /* Settings overlay */
 .overlay {
   position: absolute;
@@ -296,3 +297,4 @@ main { flex: 1; padding: 18px 20px calc(env(safe-area-inset-bottom, 0px) + 30px)
   width: 100%;
 }
 .saved-note { display: block; text-align: center; margin-top: 10px; color: #8FA88C; font-size: 13px; }
+ 
