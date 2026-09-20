@@ -1,122 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Benedict</title>
-  <meta name="theme-color" content="#1B2430" />
-  <link rel="manifest" href="manifest.json" />
-  <link rel="apple-touch-icon" href="icon180.png" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="Benedict" />
-  <link rel="stylesheet" href="app.css" />
-</head>
-<body>
-  <div class="app">
-    <header class="topbar">
-      <span class="brand">BENEDICT</span>
-      <button id="settingsBtn" class="icon-btn" title="Settings">⚙</button>
-    </header>
+BENEDICT ⚙
+Today Calendar News Life
+Add your weather API key and calendar link in Settings to see live data here.
+Loading your briefing…
 
-    <nav class="tabs">
-      <button class="tab active" data-tab="today">Today</button>
-      <button class="tab" data-tab="calendar">Calendar</button>
-      <button class="tab" data-tab="news">News</button>
-    </nav>
+🔊
+Coming up
+Tasks
+Add a task…
+ +
+Upcoming events
+Add topics you follow in Settings to personalize this feed.
 
-    <main>
-      <section id="tab-today" class="panel active">
-        <div id="setupNotice" class="notice hidden">
-          Add your weather API key and calendar link in
-          <a href="#" id="openSettingsLink">Settings</a> to see live data here.
-        </div>
+Your own trackers — weight, habits, anything. Never included in the daily report.
 
-        <div class="brief-card">
-          <div class="brief-header">
-            <p id="briefText" class="brief-text">Loading your briefing…</p>
-            <button id="speakBtn" class="speak-btn" title="Read briefing aloud">🔊</button>
-          </div>
-          <div id="weatherRow" class="weather-row hidden">
-            <span id="weatherTemp"></span>
-            <span id="weatherNote" class="accent"></span>
-          </div>
-        </div>
++ New tracker
+Settings
+✕
+Stored only on this device (localStorage) — sent directly to the services you point at, nowhere else.
 
-        <h2 class="section-label">Coming up</h2>
-        <div id="timeline" class="timeline"></div>
+Weather
+OpenWeatherMap API key 
+e.g. 8f3a1c2...
+ City name 
+e.g. Pardubice, CZ
+Calendar
+Secret iCal (ICS) URL 
+https://calendar.google.com/calendar/ical/.../basic.ics
+  My calendar won't load directly — route through a public CORS proxy
+Only enable this if the calendar tab stays empty with a valid link — a third-party proxy will see the URL and its contents.
 
-        <h2 class="section-label">Tasks</h2>
-        <div id="taskList" class="task-list"></div>
-        <div class="add-row">
-          <input id="taskInput" type="text" placeholder="Add a task…" />
-          <button id="addTaskBtn" class="add-btn">+</button>
-        </div>
-      </section>
+Voice
+ Read the briefing aloud automatically when I open Benedict Voice 
+ Speed 
+News topics
+Comma-separated topics you follow 
+e.g. AI, 3D printing, Pardubice
+Saved for later — no live news source is connected yet.
 
-      <section id="tab-calendar" class="panel">
-        <h2 class="section-label">Upcoming events</h2>
-        <div id="calendarList" class="timeline"></div>
-      </section>
-
-      <section id="tab-news" class="panel">
-        <p class="hint">Add topics you follow in Settings to personalize this feed.</p>
-        <div id="newsList" class="news-list"></div>
-      </section>
-    </main>
-
-    <!-- Settings overlay -->
-    <div id="settingsOverlay" class="overlay hidden">
-      <div class="sheet">
-        <div class="sheet-header">
-          <h1>Settings</h1>
-          <button id="closeSettings" class="icon-btn">✕</button>
-        </div>
-        <p class="sub">Stored only on this device (localStorage) — sent directly to the services you point at, nowhere else.</p>
-
-        <section>
-          <h2>Weather</h2>
-          <label>OpenWeatherMap API key</label>
-          <input id="weatherKey" type="text" placeholder="e.g. 8f3a1c2..." />
-          <label>City name</label>
-          <input id="cityName" type="text" placeholder="e.g. Pardubice, CZ" />
-        </section>
-
-        <section>
-          <h2>Calendar</h2>
-          <label>Secret iCal (ICS) URL</label>
-          <input id="icsUrl" type="text" placeholder="https://calendar.google.com/calendar/ical/.../basic.ics" />
-          <label class="checkbox-row">
-            <input id="useProxy" type="checkbox" />
-            <span>My calendar won't load directly — route through a public CORS proxy</span>
-          </label>
-          <p class="hint">Only enable this if the calendar tab stays empty with a valid link — a third-party proxy will see the URL and its contents.</p>
-        </section>
-
-        <section>
-          <h2>Voice</h2>
-          <label class="checkbox-row">
-            <input id="autoSpeak" type="checkbox" />
-            <span>Read the briefing aloud automatically when I open Benedict</span>
-          </label>
-          <label>Voice</label>
-          <select id="voiceSelect"></select>
-          <label>Speed</label>
-          <input id="rate" type="range" min="0.7" max="1.4" step="0.05" />
-        </section>
-
-        <section>
-          <h2>News topics</h2>
-          <label>Comma-separated topics you follow</label>
-          <input id="newsTopics" type="text" placeholder="e.g. AI, 3D printing, Pardubice" />
-          <p class="hint">Saved for later — no live news source is connected yet.</p>
-        </section>
-
-        <button id="saveBtn">Save settings</button>
-        <span id="savedNote" class="saved-note hidden">Saved.</span>
-      </div>
-    </div>
-  </div>
-  <script type="module" src="app.js"></script>
-</body>
-</html>
+Save settings Saved.
