@@ -66,7 +66,7 @@
       </section>
 
       <section id="tab-life" class="panel">
-        <p class="hint">Your own trackers — weight, habits, anything. Never included in the daily report.</p>
+        <p class="hint">Your own trackers — weight, habits, anything. Tap a card for its full history. Never included in the daily report.</p>
         <div id="trackerList" class="tracker-list"></div>
         <button id="addTrackerBtn" class="add-tracker-btn">+ New tracker</button>
       </section>
@@ -108,6 +108,7 @@
           </label>
           <label>Voice</label>
           <select id="voiceSelect"></select>
+          <p class="hint">Left on "Auto" Benedict picks the most natural-sounding voice your device offers.</p>
           <label>Speed</label>
           <input id="rate" type="range" min="0.7" max="1.4" step="0.05" />
         </section>
@@ -121,6 +122,20 @@
 
         <button id="saveBtn">Save settings</button>
         <span id="savedNote" class="saved-note hidden">Saved.</span>
+      </div>
+    </div>
+
+    <!-- Tracker detail overlay -->
+    <div id="trackerDetailOverlay" class="overlay hidden">
+      <div class="sheet">
+        <div class="sheet-header">
+          <h1 id="detailTitle">Tracker</h1>
+          <button id="closeTrackerDetail" class="icon-btn">✕</button>
+        </div>
+        <div id="detailChart"></div>
+        <div id="detailStats" class="tracker-summary" style="margin-top:4px;"></div>
+        <h2 class="section-label" style="margin-top:18px;">Full history</h2>
+        <div id="detailHistory" class="history-list"></div>
       </div>
     </div>
   </div>

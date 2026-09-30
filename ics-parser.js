@@ -16,7 +16,6 @@ function unfoldLines(raw) {
 }
 
 function parseICSDate(value) {
-  // Forms: 20260824T090000Z | 20260824T090000 | 20260824
   const m = value.match(/^(\d{4})(\d{2})(\d{2})(?:T(\d{2})(\d{2})(\d{2})(Z)?)?$/);
   if (!m) return null;
   const [, y, mo, d, h = "00", mi = "00", s = "00", z] = m;

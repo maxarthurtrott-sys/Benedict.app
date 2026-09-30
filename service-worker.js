@@ -1,4 +1,4 @@
-const CACHE = "benedict-v2";
+const CACHE = "benedict-v3";
 const ASSETS = [
   "./",
   "./index.html",
@@ -24,7 +24,6 @@ self.addEventListener("activate", (event) => {
   self.clients.claim();
 });
 
-// Network-first for API calls (weather/calendar), cache-first for the app shell.
 self.addEventListener("fetch", (event) => {
   const url = event.request.url;
   const isApiCall = url.includes("openweathermap.org") || url.includes("calendar.google.com") || url.includes("corsproxy.io");
