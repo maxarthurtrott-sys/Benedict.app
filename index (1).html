@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Benedict</title>
+  <meta name="theme-color" content="#1B2430" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icon180.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Benedict" />
+  <link rel="stylesheet" href="app.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <span class="brand">BENEDICT</span>
+      <button id="settingsBtn" class="icon-btn" title="Settings">⚙</button>
+    </header>
+
+    <nav class="tabs">
+      <button class="tab active" data-tab="today">Today</button>
+      <button class="tab" data-tab="calendar">Calendar</button>
+      <button class="tab" data-tab="news">News</button>
+      <button class="tab" data-tab="life">Life</button>
+    </nav>
+
+    <main>
+      <section id="tab-today" class="panel active">
+        <div id="setupNotice" class="notice hidden">
+          Add your weather API key and calendar link in
+          <a href="#" id="openSettingsLink">Settings</a> to see live data here.
+        </div>
+
+        <div class="brief-card">
+          <div class="brief-header">
+            <p id="briefText" class="brief-text">Loading your briefing…</p>
+            <button id="speakBtn" class="speak-btn" title="Read briefing aloud">🔊</button>
+          </div>
+          <div id="weatherRow" class="weather-row hidden">
+            <span id="weatherTemp"></span>
+            <span id="weatherNote" class="accent"></span>
+          </div>
+        </div>
+
+        <h2 class="section-label">Coming up</h2>
+        <div id="timeline" class="timeline"></div>
+
+        <h2 class="section-label">Tasks</h2>
+        <div id="taskList" class="task-list"></div>
+        <div class="add-row">
+          <input id="taskInput" type="text" placeholder="Add a task…" />
+          <button id="addTaskBtn" class="add-btn">+</button>
+        </div>
+      </section>
+
+      <section id="tab-calendar" class="panel">
+        <h2 class="section-label">Upcoming events</h2>
+        <div id="calendarList" class="timeline"></div>
+      </section>
+
+      <section id="tab-news" class="panel">
+        <p class="hint">Add topics you follow in Settings to personalize this feed.</p>
+        <div id="newsList" class="news-list"></div>
+      </section>
+
+      <section id="tab-life" class="panel">
+        <p class="hint">Your own trackers — weight, habits, anything. Tap a card for its full history. Never included in the daily report.</p>
+        <div id="trackerList" class="tracker-list"></div>
+        <button id="addTrackerBtn" class="add-tracker-btn">+ New tracker</button>
+      </section>
+    </main>
+
+    <!-- Settings overlay -->
+    <div id="settingsOverlay" class="overlay hidden">
+      <div class="sheet">
+        <div class="sheet-header">
+          <h1>Settings</h1>
+          <button id="closeSettings" class="icon-btn">✕</button>
+        </div>
+        <p class="sub">Stored only on this device (localStorage) — sent directly to the services you point at, nowhere else.</p>
+
+        <section>
+          <h2>Weather</h2>
+          <label>OpenWeatherMap API key</label>
+          <input id="weatherKey" type="text" placeholder="e.g. 8f3a1c2..." />
+          <label>City name</label>
+          <input id="cityName" type="text" placeholder="e.g. Pardubice, CZ" />
+        </section>
+
+        <section>
+          <h2>Calendar</h2>
+          <label>Secret iCal (ICS) URL</label>
+          <input id="icsUrl" type="text" placeholder="https://calendar.google.com/calendar/ical/.../basic.ics" />
+          <label class="checkbox-row">
+            <input id="useProxy" type="checkbox" />
+            <span>My calendar won't load directly — route through a public CORS proxy</span>
+          </label>
+          <p class="hint">Only enable this if the calendar tab stays empty with a valid link — a third-party proxy will see the URL and its contents.</p>
+        </section>
+
+        <section>
+          <h2>Voice</h2>
+          <label class="checkbox-row">
+            <input id="autoSpeak" type="checkbox" />
+            <span>Read the briefing aloud automatically when I open Benedict</span>
+          </label>
+          <label>Voice</label>
+          <div class="voice-row">
+            <select id="voiceSelect"></select>
+            <button id="testVoiceBtn" type="button" class="test-voice-btn">▶ Test</button>
+          </div>
+          <p class="hint">Left on "Auto" Benedict picks the most natural-sounding voice your device offers. On Pixel, check for a "Wavenet" or "Neural" voice in your phone's own TTS settings first — it'll show up here once installed.</p>
+          <label>Speed</label>
+          <input id="rate" type="range" min="0.7" max="1.4" step="0.05" />
+        </section>
+
+        <section>
+          <h2>Stocks</h2>
+          <label>Finnhub API key (free, no card)</label>
+          <input id="stocksApiKey" type="text" placeholder="e.g. cn8x9..." />
+          <label>Tickers, comma-separated</label>
+          <input id="stockSymbols" type="text" placeholder="e.g. AAPL, TSLA, NVDA" />
+          <p class="hint">Get a free key at finnhub.io → Sign up → Dashboard → API key.</p>
+        </section>
+
+        <section>
+          <h2>News</h2>
+          <label>GNews API key (free, no card)</label>
+          <input id="newsApiKey" type="text" placeholder="e.g. 93f1..." />
+          <label>Comma-separated topics you follow</label>
+          <input id="newsTopics" type="text" placeholder="e.g. AI, 3D printing, Pardubice" />
+          <p class="hint">Get a free key at gnews.io → Sign up → copy your API key.</p>
+        </section>
+
+        <section>
+          <h2>Backup</h2>
+          <p class="hint">Your data lives only on this device. Export a file now and then; Import restores everything after a reinstall. The file contains your API keys, so keep it private.</p>
+          <button id="exportBtn" type="button" class="tracker-btn">Export backup</button>
+          <button id="importBtn" type="button" class="tracker-btn">Import backup</button>
+          <input id="importFile" type="file" accept="application/json" hidden />
+          <p id="backupNote" class="hint"></p>
+        </section>
+
+        <button id="saveBtn">Save settings</button>
+        <span id="savedNote" class="saved-note hidden">Saved.</span>
+      </div>
+    </div>
+
+    <!-- Tracker detail overlay -->
+    <div id="trackerDetailOverlay" class="overlay hidden">
+      <div class="sheet">
+        <div class="sheet-header">
+          <h1 id="detailTitle">Tracker</h1>
+          <button id="closeTrackerDetail" class="icon-btn">✕</button>
+        </div>
+        <div id="detailChart"></div>
+        <div id="detailStats" class="tracker-summary" style="margin-top:4px;"></div>
+        <h2 class="section-label" style="margin-top:18px;">Full history</h2>
+        <div id="detailHistory" class="history-list"></div>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="app.js"></script>
+  <script type="module" src="olven.js"></script>
+</body>
+</html>
