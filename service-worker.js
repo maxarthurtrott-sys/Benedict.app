@@ -1,37 +1,23 @@
+// Network-first for app files, so updates arrive by themselves (no more clearing cache).
 const CACHE = "benedict-v3";
-const ASSETS = [
-  "./",
-  "./index.html",
-  "./app.css",
-  "./app.js",
-  "./ics-parser.js",
-  "./manifest.json",
-  "./icon192.png",
-  "./icon512.png",
-];
+const SHELL = ["./", "./index.html", "./app.css", "./app.js", "./ics-parser.js", "./olven.js", "./manifest.json", "./icon180.png", "./icon192.png", "./icon512.png"];
 
-self.addEventListener("install", (event) => {
-  event.waitUntil(caches.open(CACHE).then((c) => c.addAll(ASSETS)));
-  self.skipWaiting();
+self.addEventListener("install", (e) => {
+  e.waitUntil(caches.open(CACHE).then((c) => Promise.allSettled(SHELL.map((u) => c.add(u)))).then(() => self.skipWaiting()));
 });
-
-self.addEventListener("activate", (event) => {
-  event.waitUntil(
-    caches.keys().then((keys) =>
-      Promise.all(keys.filter((k) => k !== CACHE).map((k) => caches.delete(k)))
-    )
-  );
-  self.clients.claim();
+self.addEventListener("activate", (e) => {
+  e.waitUntil(caches.keys().then((ks) => Promise.all(ks.filter((k) => k !== CACHE).map((k) => caches.delete(k)))).then(() => self.clients.claim()));
 });
-
-self.addEventListener("fetch", (event) => {
-  const url = event.request.url;
-  const isApiCall = url.includes("openweathermap.org") || url.includes("calendar.google.com") || url.includes("corsproxy.io");
-  if (isApiCall) {
-    event.respondWith(fetch(event.request).catch(() => caches.match(event.request)));
+self.addEventListener("fetch", (e) => {
+  const req = e.request, url = new URL(req.url);
+  if (req.method !== "GET" || url.origin !== location.origin) return; // APIs go straight to the network
+  if (/\.(png|ico|svg)$/.test(url.pathname)) {
+    e.respondWith(caches.match(req).then((r) => r || fetch(req)));
     return;
   }
-  event.respondWith(
-    caches.match(event.request).then((cached) => cached || fetch(event.request))
+  e.respondWith(
+    fetch(req, { cache: "no-cache" })
+      .then((res) => { const copy = res.clone(); caches.open(CACHE).then((c) => c.put(req, copy)); return res; })
+      .catch(() => caches.match(req).then((r) => r || caches.match("./index.html")))
   );
 });
